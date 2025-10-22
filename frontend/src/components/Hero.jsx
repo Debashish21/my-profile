@@ -5,6 +5,7 @@ import { Button } from './ui/button';
 const Hero = ({ data }) => {
   const [displayText, setDisplayText] = useState('');
   const [isVisible, setIsVisible] = useState(false);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const fullText = data.personal.title;
 
   useEffect(() => {
@@ -20,6 +21,14 @@ const Hero = ({ data }) => {
     }, 100);
     return () => clearInterval(timer);
   }, [fullText]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    setMousePosition({
+      x: e.clientX - rect.left,
+      y: e.clientY - rect.top
+    });
+  };
 
   const scrollToSection = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
