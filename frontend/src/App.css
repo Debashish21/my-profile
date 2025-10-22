@@ -36,6 +36,38 @@ html {
   animation: blink 1s infinite;
 }
 
+/* Heartbeat pulse animation - mimics real heartbeat rhythm */
+@keyframes heartbeat {
+  0% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  10% { 
+    transform: translate(-50%, -50%) scale(1.05);
+    opacity: 0.95;
+  }
+  20% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  30% { 
+    transform: translate(-50%, -50%) scale(1.08);
+    opacity: 0.9;
+  }
+  40% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+  100% { 
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 2s ease-in-out infinite;
+}
+
 /* Prevent FOUC */
 .App-header {
   display: none;
