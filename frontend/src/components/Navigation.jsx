@@ -57,16 +57,8 @@ const Navigation = () => {
       }`}>
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
-            {/* Logo/Name */}
-            <button
-              onClick={() => scrollToSection('hero')}
-              className="text-[#64FFDA] font-mono text-xl font-bold hover:text-[#00D9FF] transition-colors duration-300"
-            >
-              &lt;DR /&gt;
-            </button>
-
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-8">
+            <div className="hidden md:flex items-center gap-8 w-full justify-center">
               {sections.slice(1).map((section) => (
                 <button
                   key={section.id}
