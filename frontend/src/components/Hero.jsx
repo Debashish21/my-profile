@@ -50,6 +50,8 @@ const Hero = ({ data }) => {
     <section 
       className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#0A192F] via-[#0f2847] to-[#0A192F] overflow-hidden"
       onMouseMove={handleMouseMove}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       {/* Animated background grid */}
       <div className="absolute inset-0 opacity-10">
@@ -59,15 +61,16 @@ const Hero = ({ data }) => {
         }}></div>
       </div>
 
-      {/* Mouse-tracking glow effect */}
+      {/* Mouse-tracking glow effect with heartbeat pulse */}
       <div 
-        className="absolute w-96 h-96 rounded-full pointer-events-none transition-opacity duration-300"
+        className="absolute w-96 h-96 rounded-full pointer-events-none animate-heartbeat"
         style={{
           background: 'radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, rgba(100, 255, 218, 0.05) 40%, transparent 70%)',
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
           transform: 'translate(-50%, -50%)',
-          filter: 'blur(40px)'
+          filter: 'blur(40px)',
+          transition: isHovering ? 'none' : 'left 0.3s ease-out, top 0.3s ease-out'
         }}
       ></div>
 
