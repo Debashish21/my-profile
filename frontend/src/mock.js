@@ -8,7 +8,7 @@ export const portfolioData = {
     tagline: "Building scalable, intuitive web experiences with modern AI tools",
     bio: "Technically grounded professional with 2+ years of experience in the product development lifecycle, specializing in frontend engineering and cross-functional collaboration. Leverages modern AI tools (GitHub Copilot, Windsurf, Cursor, Claude) to enhance productivity, streamline workflows, and support data-informed decision-making."
   },
-  
+   
   experience: [
     {
       id: 1,

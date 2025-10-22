@@ -11,7 +11,7 @@ import Skills from './components/Skills';
 import Extracurricular from './components/Extracurricular';
 import Education from './components/Education';
 import Contact from './components/Contact';
-
+ 
 function App() {
   return (
     <div className="App">

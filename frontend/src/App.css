@@ -11,7 +11,7 @@ html {
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 12px;
-}
+} 
 
 ::-webkit-scrollbar-track {
   background: #0A192F;

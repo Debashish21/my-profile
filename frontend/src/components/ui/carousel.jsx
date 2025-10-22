@@ -19,7 +19,7 @@ function useCarousel() {
 
 const Carousel = React.forwardRef((
   {
-    orientation = "horizontal",
+    orientation = "horizontal", 
     opts,
     setApi,
     plugins,

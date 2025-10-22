@@ -22,7 +22,7 @@ const Hero = ({ data }) => {
     }, 100);
     return () => clearInterval(timer);
   }, [fullText]);
-
+ 
   const handleMouseMove = (e) => {
     if (isHovering) {
       const rect = e.currentTarget.getBoundingClientRect();

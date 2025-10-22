@@ -23,7 +23,7 @@ const ScrollToTop = () => {
       top: 0,
       behavior: 'smooth'
     });
-  };
+  }; 
 
   return (
     <>

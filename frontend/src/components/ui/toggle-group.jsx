@@ -21,7 +21,7 @@ const ToggleGroup = React.forwardRef(({ className, variant, size, children, ...p
 ))
 
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName
-
+ 
 const ToggleGroupItem = React.forwardRef(({ className, children, variant, size, ...props }, ref) => {
   const context = React.useContext(ToggleGroupContext)
 

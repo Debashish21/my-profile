@@ -1,7 +1,7 @@
 // dev-server-setup.js
 // Dev server middleware configuration for visual editing
 const fs = require("fs");
-const path = require("path");
+const path = require("path"); 
 const express = require("express");
 const { execSync } = require("child_process");
 

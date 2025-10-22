@@ -20,7 +20,7 @@ const Experience = ({ data }) => {
 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
-    }
+    } 
 
     return () => observer.disconnect();
   }, []);

@@ -25,7 +25,7 @@ const Skills = ({ data }) => {
       },
       { threshold: 0.2 }
     );
-
+ 
     if (sectionRef.current) {
       observer.observe(sectionRef.current);
     }

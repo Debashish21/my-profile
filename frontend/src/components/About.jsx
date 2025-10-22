@@ -22,7 +22,7 @@ const About = ({ data }) => {
 
     return () => observer.disconnect();
   }, []);
-
+ 
   const highlights = [
     { icon: Code2, text: '2+ Years Experience', color: '#64FFDA' },
     { icon: Rocket, text: 'Lead Engineer at PepsiCo', color: '#00D9FF' },

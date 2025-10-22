@@ -21,7 +21,7 @@ const PopoverContent = React.forwardRef(({ className, align = "center", sideOffs
       )}
       {...props} />
   </PopoverPrimitive.Portal>
-))
+)) 
 PopoverContent.displayName = PopoverPrimitive.Content.displayName
 
 export { Popover, PopoverTrigger, PopoverContent, PopoverAnchor }

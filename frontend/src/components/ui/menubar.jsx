@@ -18,7 +18,7 @@ function MenubarGroup({
 
 function MenubarPortal({
   ...props
-}) {
+}) { 
   return <MenubarPrimitive.Portal {...props} />;
 }
 

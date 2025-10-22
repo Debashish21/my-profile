@@ -15,7 +15,7 @@ const Navigation = () => {
     { id: 'extracurricular', label: 'Leadership' },
     { id: 'education', label: 'Education' },
     { id: 'contact', label: 'Contact' }
-  ];
+  ]; 
 
   useEffect(() => {
     const handleScroll = () => {

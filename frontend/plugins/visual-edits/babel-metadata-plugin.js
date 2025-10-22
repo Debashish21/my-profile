@@ -1,7 +1,7 @@
 // babel-metadata-plugin.js
 // Babel plugin for JSX transformation - adds metadata to all elements
 const path = require("path");
-const fs = require("fs");
+const fs = require("fs"); 
 
 // ───────────────────────────────────────────────────────────────────────────────
 // ===== Dynamic composite detection (auto-exclude) =====

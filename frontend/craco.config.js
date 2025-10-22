@@ -42,7 +42,7 @@ const webpackConfig = {
         webpackConfig.plugins = webpackConfig.plugins.filter(plugin => {
           return !(plugin.constructor.name === 'HotModuleReplacementPlugin');
         });
-
+ 
         // Disable watch mode
         webpackConfig.watch = false;
         webpackConfig.watchOptions = {

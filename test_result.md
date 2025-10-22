@@ -28,7 +28,7 @@
 ##         -agent: "main"  # or "testing" or "user"
 ##         -comment: "Detailed comment about status"
 ##
-## frontend:
+## frontend: 
 ##   - task: "Task name"
 ##     implemented: true
 ##     working: true  # or false or "NA"

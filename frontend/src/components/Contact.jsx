@@ -21,7 +21,7 @@ const Contact = ({ data }) => {
       observer.observe(sectionRef.current);
     }
 
-    return () => observer.disconnect();
+    return () => observer.disconnect(); 
   }, []);
 
   return (
