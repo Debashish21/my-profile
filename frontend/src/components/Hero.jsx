@@ -63,13 +63,13 @@ const Hero = ({ data }) => {
 
       {/* Mouse-tracking glow effect with heartbeat pulse */}
       <div 
-        className="absolute w-96 h-96 rounded-full pointer-events-none animate-heartbeat"
+        className="absolute w-[600px] h-[600px] rounded-full pointer-events-none animate-heartbeat"
         style={{
-          background: 'radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, rgba(100, 255, 218, 0.05) 40%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(100, 255, 218, 0.25) 0%, rgba(100, 255, 218, 0.15) 30%, rgba(100, 255, 218, 0.08) 50%, transparent 70%)',
           left: `${mousePosition.x}px`,
           top: `${mousePosition.y}px`,
           transform: 'translate(-50%, -50%)',
-          filter: 'blur(40px)',
+          filter: 'blur(50px)',
           transition: isHovering ? 'none' : 'left 0.3s ease-out, top 0.3s ease-out'
         }}
       ></div>
