@@ -35,7 +35,10 @@ const Hero = ({ data }) => {
   };
 
   return (
-    <section className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#0A192F] via-[#0f2847] to-[#0A192F] overflow-hidden">
+    <section 
+      className="min-h-screen flex items-center justify-center relative bg-gradient-to-br from-[#0A192F] via-[#0f2847] to-[#0A192F] overflow-hidden"
+      onMouseMove={handleMouseMove}
+    >
       {/* Animated background grid */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0" style={{
@@ -44,9 +47,17 @@ const Hero = ({ data }) => {
         }}></div>
       </div>
 
-      {/* Floating elements */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-[#64FFDA] rounded-full opacity-5 blur-3xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#00D9FF] rounded-full opacity-5 blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      {/* Mouse-tracking glow effect */}
+      <div 
+        className="absolute w-96 h-96 rounded-full pointer-events-none transition-opacity duration-300"
+        style={{
+          background: 'radial-gradient(circle, rgba(100, 255, 218, 0.15) 0%, rgba(100, 255, 218, 0.05) 40%, transparent 70%)',
+          left: `${mousePosition.x}px`,
+          top: `${mousePosition.y}px`,
+          transform: 'translate(-50%, -50%)',
+          filter: 'blur(40px)'
+        }}
+      ></div>
 
       <div className={`relative z-10 max-w-5xl mx-auto px-6 text-center transition-all duration-1000 transform ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
