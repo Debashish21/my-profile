@@ -76,16 +76,26 @@ const About = ({ data }) => {
             </div>
 
             <Card className="p-8 bg-[#112240] border-[#1d3557] hover:border-[#64FFDA] transition-all duration-300">
-              <h3 className="text-[#CCD6F6] font-semibold text-2xl mb-6">Tech Arsenal</h3>
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-[#CCD6F6] font-semibold text-2xl">Daily Stack</h3>
+                <a 
+                  href="#skills" 
+                  className="text-[#64FFDA] text-xs font-mono hover:underline transition-all duration-300 flex items-center gap-1 group"
+                >
+                  View all skills
+                  <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                </a>
+              </div>
+              <p className="text-[#8892B0] text-sm mb-6">Tools & technologies I'm actively working with</p>
               
               <div className="space-y-6">
                 <div>
-                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">Frontend Excellence</h4>
+                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">Development</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['React JS', 'TypeScript', 'Material UI', 'Tailwind CSS', 'GraphQL'].map((tech, i) => (
+                    {['React JS'].map((tech, i) => (
                       <span 
                         key={i} 
-                        className="px-3 py-1 bg-[#0A192F] text-[#64FFDA] rounded-full text-sm font-mono border border-[#64FFDA] hover:bg-[#64FFDA] hover:text-[#0A192F] transition-all duration-300"
+                        className="px-3 py-1 bg-[#0A192F] text-[#64FFDA] rounded-full text-sm font-mono border border-[#64FFDA] hover:bg-[#64FFDA] hover:text-[#0A192F] transition-all duration-300 cursor-pointer"
                       >
                         {tech}
                       </span>
@@ -94,12 +104,12 @@ const About = ({ data }) => {
                 </div>
 
                 <div>
-                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">AI-Powered Tools</h4>
+                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">AI Development Tools</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['GitHub Copilot', 'Claude', 'Cursor', 'Windsurf'].map((tool, i) => (
+                    {['GitHub Copilot', 'Claude AI', 'Cursor', 'Windsurf'].map((tool, i) => (
                       <span 
                         key={i} 
-                        className="px-3 py-1 bg-[#0A192F] text-[#00D9FF] rounded-full text-sm font-mono border border-[#00D9FF] hover:bg-[#00D9FF] hover:text-[#0A192F] transition-all duration-300"
+                        className="px-3 py-1 bg-[#0A192F] text-[#00D9FF] rounded-full text-sm font-mono border border-[#00D9FF] hover:bg-[#00D9FF] hover:text-[#0A192F] transition-all duration-300 cursor-pointer"
                       >
                         {tool}
                       </span>
@@ -108,12 +118,12 @@ const About = ({ data }) => {
                 </div>
 
                 <div>
-                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">Data & Analytics</h4>
+                  <h4 className="text-[#64FFDA] font-mono text-sm mb-3">Product Management</h4>
                   <div className="flex flex-wrap gap-2">
-                    {['Power BI', 'Python', 'SQL', 'Data Analysis'].map((skill, i) => (
+                    {['GTM Strategy', 'Agile', 'UI/UX', 'Feature Grooming', 'Stakeholder Management', 'Product Roadmap'].map((skill, i) => (
                       <span 
                         key={i} 
-                        className="px-3 py-1 bg-[#0A192F] text-[#8892B0] rounded-full text-sm font-mono border border-[#8892B0] hover:bg-[#8892B0] hover:text-[#0A192F] transition-all duration-300"
+                        className="px-3 py-1 bg-[#0A192F] text-[#8892B0] rounded-full text-sm font-mono border border-[#8892B0] hover:bg-[#8892B0] hover:text-[#0A192F] transition-all duration-300 cursor-pointer"
                       >
                         {skill}
                       </span>

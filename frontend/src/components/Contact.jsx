@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
+import { Mail, Phone, MapPin, Linkedin } from 'lucide-react';
 
 const Contact = ({ data }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -103,30 +103,16 @@ const Contact = ({ data }) => {
                 </div>
 
                 <div className="mt-8">
-                  <h4 className="text-[#CCD6F6] font-semibold mb-4">Find me on:</h4>
-                  <div className="flex gap-4">
-                    <a
-                      href="#"
-                      className="p-3 bg-[#0A192F] rounded-lg border border-[#1d3557] hover:border-[#64FFDA] transition-all duration-300 group"
-                      aria-label="LinkedIn"
-                    >
-                      <Linkedin className="w-5 h-5 text-[#64FFDA] group-hover:text-[#00D9FF]" />
-                    </a>
-                    <a
-                      href="#"
-                      className="p-3 bg-[#0A192F] rounded-lg border border-[#1d3557] hover:border-[#64FFDA] transition-all duration-300 group"
-                      aria-label="GitHub"
-                    >
-                      <Github className="w-5 h-5 text-[#64FFDA] group-hover:text-[#00D9FF]" />
-                    </a>
-                    <a
-                      href="#"
-                      className="p-3 bg-[#0A192F] rounded-lg border border-[#1d3557] hover:border-[#64FFDA] transition-all duration-300 group"
-                      aria-label="Twitter"
-                    >
-                      <Twitter className="w-5 h-5 text-[#64FFDA] group-hover:text-[#00D9FF]" />
-                    </a>
-                  </div>
+                  <h4 className="text-[#CCD6F6] font-semibold mb-4">Connect with me:</h4>
+                  <a
+                    href="https://www.linkedin.com/in/debashish-ram/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 p-4 bg-[#0A192F] rounded-lg border border-[#1d3557] hover:border-[#64FFDA] transition-all duration-300 group hover:scale-105 transform"
+                  >
+                    <Linkedin className="w-6 h-6 text-[#64FFDA] group-hover:text-[#00D9FF]" />
+                    <span className="text-[#CCD6F6] font-mono group-hover:text-[#64FFDA]">LinkedIn</span>
+                  </a>
                 </div>
               </div>
             </div>
