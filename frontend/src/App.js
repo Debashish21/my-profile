@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { portfolioData } from './mock';
+import { portfolioData } from './data';
 import Navigation from './components/Navigation';
 import ScrollToTop from './components/ScrollToTop';
 import Hero from './components/Hero';

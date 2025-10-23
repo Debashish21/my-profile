@@ -113,7 +113,6 @@ const Experience = ({ data }) => {
           {/* Internships */}
           <div className="mt-20">
             <h3 className="text-3xl font-bold text-[#CCD6F6] mb-8">
-              <span className="text-[#64FFDA] font-mono text-xl mr-2">//</span>
               Internships
             </h3>
             
