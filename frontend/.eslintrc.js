@@ -6,13 +6,7 @@ module.exports = {
       version: 'detect'
     }
   },
-  plugins: [
-    'react',
-    'jsx-a11y',
-    'import'
-  ],
   rules: {
     // Add any custom rules here
-  },
-  overrides: []
+  }
 };
