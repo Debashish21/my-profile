@@ -57,24 +57,6 @@ const Education = ({ data }) => {
                     <span className="font-mono">Vellore, India</span>
                   </div>
                 </div>
-
-                <div className="p-6 bg-[#0A192F] rounded-lg border border-[#1d3557]">
-                  <h4 className="text-[#CCD6F6] font-semibold mb-3">Key Highlights:</h4>
-                  <ul className="space-y-2">
-                    <li className="text-[#8892B0] flex items-start gap-2">
-                      <span className="text-[#64FFDA] mt-1">▹</span>
-                      <span>Specialized in Web Development and Data Structures</span>
-                    </li>
-                    <li className="text-[#8892B0] flex items-start gap-2">
-                      <span className="text-[#64FFDA] mt-1">▹</span>
-                      <span>Active member of DreamMerchants Business Club</span>
-                    </li>
-                    <li className="text-[#8892B0] flex items-start gap-2">
-                      <span className="text-[#64FFDA] mt-1">▹</span>
-                      <span>Entrepreneur Lead at IIT Madras Innovation Centre</span>
-                    </li>
-                  </ul>
-                </div>
               </div>
             </div>
           </Card>

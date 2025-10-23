@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Card } from './ui/card';
-import { Award, Users, TrendingUp } from 'lucide-react';
+import { Award, Users, TrendingUp, Trophy } from 'lucide-react';
 
 const Extracurricular = ({ data }) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,7 +32,7 @@ const Extracurricular = ({ data }) => {
           <div className="mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-[#CCD6F6] mb-4">
               <span className="text-[#64FFDA] font-mono text-2xl mr-2">05.</span>
-              Leadership & Entrepreneurship
+              Leadership & Achievements
             </h2>
             <div className="w-32 h-1 bg-[#64FFDA]"></div>
           </div>
@@ -49,13 +49,18 @@ const Extracurricular = ({ data }) => {
                 <div className="flex items-start gap-4 mb-4">
                   <div className="p-3 bg-[#0A192F] rounded-lg border border-[#64FFDA]">
                     {index === 0 ? (
+                      <Trophy className="w-6 h-6 text-[#FFD700]" />
+                    ) : index === 1 ? (
                       <Award className="w-6 h-6 text-[#64FFDA]" />
                     ) : (
                       <Users className="w-6 h-6 text-[#64FFDA]" />
                     )}
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-[#CCD6F6] mb-1">{activity.organization}</h3>
+                    <h3 className="text-xl font-bold text-[#CCD6F6] mb-1 flex items-center gap-2">
+                      {activity.organization}
+                      {index === 0 && <span className="text-2xl">🏆</span>}
+                    </h3>
                     <p className="text-[#64FFDA] font-semibold mb-2">{activity.role}</p>
                     <p className="text-[#8892B0] text-sm font-mono">{activity.duration}</p>
                   </div>

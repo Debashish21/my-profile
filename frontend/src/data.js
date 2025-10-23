@@ -1,14 +1,15 @@
+// Portfolio data organized by sections for easy editing
 export const portfolioData = {
   personal: {
     name: "Debashish Ram",
-    title: "Lead Frontend Engineer",
+    title: "Software Engineer 1",
     location: "Hyderabad",
     email: "debashishram@gmail.com",
     phone: "7661909552",
     tagline: "Building scalable, intuitive web experiences with modern AI tools",
     bio: "Technically grounded professional with 2+ years of experience in the product development lifecycle, specializing in frontend engineering and cross-functional collaboration. Leverages modern AI tools (GitHub Copilot, Windsurf, Cursor, Claude) to enhance productivity, streamline workflows, and support data-informed decision-making."
   },
-   
+
   experience: [
     {
       id: 1,
@@ -46,21 +47,10 @@ export const portfolioData = {
       impact: "40% improved operational efficiency"
     }
   ],
-  
+
   internships: [
     {
       id: 1,
-      company: "The Sparks Foundation",
-      role: "Data Science and Business Analyst Intern",
-      duration: "December 2020 – January 2021",
-      achievements: [
-        "Conducted exploratory data analysis on sales data",
-        "Generated insights and identified KPIs for data-driven decision-making"
-      ],
-      techStack: ["Python", "Data Analysis", "Power BI"]
-    },
-    {
-      id: 2,
       company: "The Climber - MyCaptain",
       role: "Marketing and Sales Intern",
       duration: "July 2020 – August 2020",
@@ -71,74 +61,92 @@ export const portfolioData = {
       techStack: ["Marketing Strategy", "Market Research"]
     }
   ],
-  
+
   projects: [
     {
       id: 1,
-      title: "Dynamic Multi-Country Platform",
-      company: "PepsiCo",
-      description: "Schema-driven form generation system adaptable to regional requirements with minimal code changes",
-      techStack: ["React JS", "JSONForms", "TypeScript", "Material UI"],
-      metrics: {
-        countries: 3,
-        reduction: "60% code reduction"
-      }
-    },
-    {
-      id: 2,
-      title: "Admin Web Portal & Dashboards",
-      company: "PepsiCo",
-      description: "Dynamic web-based dashboards for consumer insights and campaign performance metrics",
-      techStack: ["React JS", "Material UI", "GraphQL", "Power BI"],
-      metrics: {
-        dashboards: 8,
-        users: "200+ users"
-      }
-    },
-    {
-      id: 3,
       title: "Market Research & Product Development",
       company: "IIT Madras",
       description: "Comprehensive market research and prototype evaluation for product-market fit",
       techStack: ["Market Research", "Data Analysis", "Product Management"],
-      metrics: {
-        surveys: "500+ responses",
-        insights: "15+ key insights"
+      metrics: {  
+        surveys: "300+ responses",
+        insights: "12+ key insights"
       }
-    }
+    },
+    {
+      id: 2,
+      title: "Custom Design Library MCP Server",
+      company: "Independent Project",
+      description: "Model Context Protocol server for seamless design system integration with AI coding assistants, enabling direct component replacement and vibe-based coding workflows",
+      techStack: ["MCP", "TypeScript", "python", "AI Integration"],
+      metrics: {
+        integration: "Real-time component fetching",
+        workflow: "Direct component replacement"
+      }
+    },
+    {
+      id: 3,
+      title: "Interactive Voice & Gesture Gaming Platform for Marketing",
+      company: "Hackathon",
+      description: "Micro-frontend gaming platform featuring voice and gesture-controlled classics (Pac-Man, Flappy Bird, Snake) designed for branded kiosk experiences. Enables brands to create engaging customer experiences at high-traffic venues with customizable in-game brand elements for experiential marketing",
+      techStack: ["Next.js", "React", "TensorFlow.js", "Speech Recognition", "OpenCV", "Micro-frontends"],
+      metrics: {
+        games: "3 AI-powered games",
+        controls: "Voice & gesture interaction",
+        deployment: "Plug-and-play architecture"
+      }
+    },
+
   ],
-  
+
   skills: {
-    frontend: [
-      { name: "React JS", level: 95 },
-      { name: "TypeScript", level: 85 },
-      { name: "JavaScript", level: 90 },
-      { name: "Material UI", level: 90 },
-      { name: "Tailwind CSS", level: 85 }
+    technical: [
+      { name: "React JS"},
+      { name: "JavaScript" },
+      { name: "Material UI" },
+      { name: "HTML5/CSS3" },
+      { name: "SQL"},
+      { name: "GitHub Copilot" },
+      { name: "Cursor" },
+      { name: "Claude AI" },
+      { name: "Windsurf" }
     ],
-    backend: [
-      { name: "GraphQL", level: 80 },
-      { name: "SQL", level: 75 },
-      { name: "Python", level: 70 }
+    productManagement: [
+      { name: "Product Roadmap" },
+      { name: "GTM Strategy" },
+      { name: "Product Lifecycle Management" },
+      { name: "Competitive Analysis" },
+      { name: "Stakeholder Management" },
+      { name: "Agile" },
+      { name: "UI/UX Design" },
+      { name: "Data Analysis" }
     ],
-    tools: [
-      { name: "GitHub Copilot", level: 90 },
-      { name: "Cursor", level: 85 },
-      { name: "Claude AI", level: 90 },
-      { name: "Power BI", level: 80 },
-      { name: "Windsurf", level: 85 }
-    ],
-    other: [
-      { name: "Product Management", level: 75 },
-      { name: "Agile", level: 85 },
-      { name: "UI/UX Design", level: 80 },
-      { name: "Data Analysis", level: 75 }
+    marketing: [
+      { name: "Market Research" },
+      { name: "Branding Strategy" },
+      { name: "Digital Marketing" },
+      { name: "Content Strategy" },
+      { name: "Customer Segmentation" },
+      { name: "Campaign Management" },
+      { name: "Social Media Marketing" },
+      { name: "Marketing Analytics" }
     ]
   },
-  
+
   extracurricular: [
     {
       id: 1,
+      organization: "PepsiCo Global DPA Hackathon 2025",
+      role: "Winner",
+      duration: "2025",
+      achievements: [
+        "Winner in Theme 1: AI-based Customer Engagement tool or web interface",
+        "Runner-up in Theme 2: AI-based state-of-the-art tech tool to optimize business process"
+      ]
+    },
+    {
+      id: 2,
       organization: "IIT Madras - GDC Centre",
       role: "Entrepreneur Lead",
       duration: "December 2021 – March 2022",
@@ -149,7 +157,7 @@ export const portfolioData = {
       ]
     },
     {
-      id: 2,
+      id: 3,
       organization: "DreamMerchants Business Club",
       role: "Core Committee Member & Board Representative",
       duration: "February 2019 – February 2021",
@@ -160,7 +168,7 @@ export const portfolioData = {
       ]
     }
   ],
-  
+
   education: {
     degree: "B.Tech in Computer Science Engineering",
     institution: "Vellore Institute of Technology, Vellore",
