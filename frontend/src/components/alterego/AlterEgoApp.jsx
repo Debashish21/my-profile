@@ -3,14 +3,12 @@ import AlterEgoHero from './AlterEgoHero';
 import AlterEgoSection from './AlterEgoSection';
 import AlterEgoNav from './AlterEgoNav';
 import AudioController from './AudioController';
-import CyberBackground from '../CyberBackground';
 import { alterEgoData } from '../../alterEgoData';
 
 const AlterEgoApp = ({ onExit }) => {
   return (
     <div className="AlterEgo relative min-h-screen">
-      {/* Shared Cyber Background */}
-      <CyberBackground />
+      {/* CyberBackground is managed globally in App.js */}
       <AlterEgoNav onExit={onExit} />
       <AudioController />
       <AlterEgoHero data={alterEgoData} />
@@ -25,7 +23,7 @@ const AlterEgoApp = ({ onExit }) => {
       ))}
 
       {/* Footer */}
-      <footer className="relative py-12 px-6 border-t border-cyan-400/30 bg-black/50">
+      <footer className="relative py-12 px-6 border-t border-cyan-400/30 bg-black/30 backdrop-blur-md">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-gray-400 font-mono text-sm">
             <span className="text-cyan-400">{'> '}</span>

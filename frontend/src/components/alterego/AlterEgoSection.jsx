@@ -106,7 +106,7 @@ const AlterEgoSection = ({ section, sectionKey }) => {
     <section 
       ref={sectionRef}
       id={sectionIdMap[sectionKey] || sectionKey}
-      className="min-h-screen py-12 md:py-20 px-4 md:px-6 relative bg-[#0a0a0f] overflow-hidden"
+      className="min-h-screen py-12 md:py-20 px-4 md:px-6 relative overflow-hidden"
     >
       {/* Animated Background - CSS-based for performance */}
       <div ref={canvasRef} className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
@@ -169,8 +169,8 @@ const AlterEgoSection = ({ section, sectionKey }) => {
                 ${hoveredCard === index ? 'opacity-100 scale-110' : 'opacity-0 scale-100'}
               `} />
 
-              {/* Card */}
-              <div className="relative h-full border border-cyan-400/30 bg-black/50 backdrop-blur-sm p-6 hover:border-cyan-400 transition-all duration-300">
+              {/* Card - Enhanced Translucent Futuristic Box */}
+              <div className="relative h-full border border-cyan-400/30 bg-black/40 backdrop-blur-md rounded-lg p-6 hover:border-cyan-400 hover:bg-black/60 transition-all duration-300 shadow-lg shadow-cyan-500/10 hover:shadow-cyan-500/30">
                 {/* Corner Accents */}
                 <div className="absolute top-0 left-0 w-4 h-4 border-l-2 border-t-2 border-cyan-400" />
                 <div className="absolute top-0 right-0 w-4 h-4 border-r-2 border-t-2 border-purple-500" />
