@@ -77,4 +77,12 @@ agenthub/agents/youtube/db
 .cache/
 
 # Mobile development
-android-sdk/ 
+android-sdk/
+
+# Alternative versions (not in use)
+frontend/src/components/alterego-v1-cyberpunk/
+frontend/src/components/future/
+frontend/src/Future.css
+frontend/src/components/MagneticPortalOrb.jsx
+frontend/src/components/WormholeTransition.jsx
+frontend/src/components/PortalTrigger.jsx 

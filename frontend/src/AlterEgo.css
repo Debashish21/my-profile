@@ -1,0 +1,240 @@
+/* Alter Ego Cyberpunk Animations */
+
+/* Grid Movement */
+@keyframes gridMove {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(40px);
+  }
+}
+
+/* Gradient Animation */
+@keyframes gradient {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 3s ease infinite;
+}
+
+/* Glitch Effects */
+@keyframes glitch-1 {
+  0%, 100% {
+    transform: translate(0);
+    opacity: 0.7;
+  }
+  20% {
+    transform: translate(-2px, 2px);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translate(-2px, -2px);
+    opacity: 0.7;
+  }
+  60% {
+    transform: translate(2px, 2px);
+    opacity: 0.5;
+  }
+  80% {
+    transform: translate(2px, -2px);
+    opacity: 0.7;
+  }
+}
+
+@keyframes glitch-2 {
+  0%, 100% {
+    transform: translate(0);
+    opacity: 0.7;
+  }
+  25% {
+    transform: translate(2px, -2px);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-2px, 2px);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(2px, 2px);
+    opacity: 0.5;
+  }
+}
+
+.animate-glitch-1 {
+  animation: glitch-1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+}
+
+.animate-glitch-2 {
+  animation: glitch-2 2.5s infinite;
+  clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+}
+
+/* Floating Particles */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(20px);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 15s infinite;
+}
+
+/* Scan Line */
+@keyframes scan {
+  0% {
+    top: 0;
+  }
+  100% {
+    top: 100%;
+  }
+}
+
+.animate-scan {
+  animation: scan 2s linear infinite;
+}
+
+/* Pulse with Delay */
+.delay-1000 {
+  animation-delay: 1s;
+}
+
+.delay-100 {
+  animation-delay: 0.1s;
+}
+
+/* Holographic Effect */
+@keyframes holographic {
+  0%, 100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(30deg);
+  }
+}
+
+.animate-holographic {
+  animation: holographic 3s ease-in-out infinite;
+}
+
+/* Data Stream */
+@keyframes dataStream {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.animate-dataStream {
+  animation: dataStream 8s linear infinite;
+}
+
+/* Neon Glow */
+@keyframes neonGlow {
+  0%, 100% {
+    text-shadow: 
+      0 0 10px rgba(6, 182, 212, 0.8),
+      0 0 20px rgba(6, 182, 212, 0.6),
+      0 0 30px rgba(6, 182, 212, 0.4);
+  }
+  50% {
+    text-shadow: 
+      0 0 20px rgba(6, 182, 212, 1),
+      0 0 30px rgba(6, 182, 212, 0.8),
+      0 0 40px rgba(6, 182, 212, 0.6);
+  }
+}
+
+.animate-neonGlow {
+  animation: neonGlow 2s ease-in-out infinite;
+}
+
+/* Portal Transition */
+@keyframes portalOpen {
+  0% {
+    clip-path: circle(0% at 100% 50%);
+    opacity: 0;
+  }
+  100% {
+    clip-path: circle(150% at 100% 50%);
+    opacity: 1;
+  }
+}
+
+@keyframes portalClose {
+  0% {
+    clip-path: circle(150% at 100% 50%);
+    opacity: 1;
+  }
+  100% {
+    clip-path: circle(0% at 100% 50%);
+    opacity: 0;
+  }
+}
+
+.portal-enter {
+  animation: portalOpen 1s ease-out forwards;
+}
+
+.portal-exit {
+  animation: portalClose 1s ease-out forwards;
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Custom Scrollbar for Alter Ego */
+.AlterEgo::-webkit-scrollbar {
+  width: 12px;
+}
+
+.AlterEgo::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+.AlterEgo::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #a855f7);
+  border-radius: 6px;
+}
+
+.AlterEgo::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #22d3ee, #c084fc);
+}

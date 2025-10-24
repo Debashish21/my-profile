@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
+import './AlterEgo.css';
 import { portfolioData } from './data';
 import Navigation from './components/Navigation';
 import ScrollToTop from './components/ScrollToTop';
@@ -8,23 +9,205 @@ import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
-import Extracurricular from './components/Extracurricular';
 import Education from './components/Education';
 import Contact from './components/Contact';
+import RealityTear from './components/RealityTear';
+import AlterEgoApp from './components/alterego/AlterEgoApp';
+import CyberBackground from './components/CyberBackground';
+
+// V2 Hyper-Future (Alternative)
+// import './Future.css';
+// import MagneticPortalOrb from './components/MagneticPortalOrb';
+// import WormholeTransition from './components/WormholeTransition';
+// import FutureApp from './components/future/FutureApp';
  
 function App() {
+  const [isAlterEgo, setIsAlterEgo] = useState(false);
+  const [tearProgress, setTearProgress] = useState(0);
+  const [isSplitting, setIsSplitting] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [alterEgoOpacity, setAlterEgoOpacity] = useState(0);
+
+  console.log(tearProgress,"tearProgress")
+  const handlePortalActivate = () => {
+    // Start transition phase
+    setIsTransitioning(true);
+    
+    // Animate AlterEgo fade-in
+    setTimeout(() => {
+      setAlterEgoOpacity(1);
+    }, 200);
+    
+    // Complete transition
+    setTimeout(() => {
+      setIsAlterEgo(true);
+      setIsTransitioning(false);
+    }, 1000);
+  };
+  
+  const handleTearProgress = (progress) => {
+    // Don't update progress if we're already in AlterEgo or transitioning out
+    if (isAlterEgo || isTransitioning) {
+      return;
+    }
+    
+    setTearProgress(progress);
+    
+    if (progress >= 100 && !isSplitting) {
+      setIsSplitting(true);
+    }
+  };
+
+  const handleExit = () => {
+    // Reset states immediately to prevent re-trigger
+    setTearProgress(0);
+    setIsSplitting(false);
+    
+    // Start reverse transition
+    setIsTransitioning(true);
+    setAlterEgoOpacity(0);
+    
+    setTimeout(() => {
+      setIsAlterEgo(false);
+      setIsTransitioning(false);
+      window.scrollTo(0, 0);
+    }, 500);
+  };
+
   return (
-    <div className="App">
-      <Navigation />
-      <ScrollToTop />
-      <Hero data={portfolioData} />
-      <About data={portfolioData} />
-      <Experience data={portfolioData} />
-      <Projects data={portfolioData} />
-      <Skills data={portfolioData} />
-      <Extracurricular data={portfolioData} />
-      <Education data={portfolioData} />
-      <Contact data={portfolioData} />
+    <div className="relative overflow-hidden">
+      {/* Cyber Background - Always visible with varying opacity */}
+      <div 
+        className="fixed inset-0 transition-opacity duration-500"
+        style={{
+          opacity: isAlterEgo ? 1 : (tearProgress / 100),
+          zIndex: 40,
+        }}
+      >
+        <CyberBackground />
+      </div>
+      
+      {/* Reality Tear Effect */}
+      <div 
+        className="transition-opacity duration-1000"
+        style={{ 
+          opacity: isAlterEgo ? 0 : 1,
+          pointerEvents: isAlterEgo ? 'none' : 'auto'
+        }}
+      >
+        <RealityTear 
+          onComplete={handlePortalActivate}
+          onProgress={handleTearProgress}
+          isActive={isAlterEgo || isTransitioning}
+        />
+      </div>
+      
+      {/* AlterEgo Transition Layer - Only visible when transitioning or active */}
+      {(isTransitioning || isAlterEgo) && (
+        <div 
+          className="transition-opacity duration-1000"
+          style={{ 
+            opacity: isAlterEgo ? 1 : alterEgoOpacity,
+            zIndex: isAlterEgo ? 50 : 45,
+            pointerEvents: isAlterEgo ? 'auto' : 'none',
+            position: isAlterEgo ? 'relative' : 'fixed',
+            inset: isAlterEgo ? 'auto' : 0,
+            minHeight: isAlterEgo ? '100vh' : 'auto',
+          }}
+        >
+          <AlterEgoApp onExit={handleExit} />
+        </div>
+      )}
+
+      {/* Main Content with peeling effect */}
+      <div 
+        className="relative min-h-screen"
+        style={{
+          opacity: 1 - tearProgress / 100,
+          pointerEvents: isAlterEgo ? 'none' : 'auto',
+          perspective: '1000px',
+          perspectiveOrigin: 'center center',
+          transition: 'opacity 1s ease-out',
+          zIndex: isAlterEgo ? 0 : 30,
+        }}
+      >
+        {/* Normal scrollable content - peel effect only when tearing */}
+        {tearProgress > 0 ? (
+          <>
+            {/* Top Half - Peels away */}
+            <div
+              className="fixed inset-x-0 top-0 overflow-hidden transition-all duration-1000 ease-out"
+              style={{
+                height: '50%',
+                transform: tearProgress > 80
+                  ? `translateY(-${tearProgress - 80}%) translateZ(-${tearProgress * 2}px) rotateX(${tearProgress/4}deg) scale(${1 - tearProgress/200})` 
+                  : 'translateY(0) translateZ(0) rotateX(0) scale(1)',
+                transformOrigin: 'bottom center',
+                opacity: tearProgress > 90 ? (100 - tearProgress) / 10 : 1,
+                filter: `blur(${(tearProgress > 80) ? (tearProgress - 80) / 5 : 0}px)`,
+                zIndex: 35,
+              }}
+            >
+              <div className="App" style={{ transform: 'translateY(0)' }}>
+                <Navigation />
+                <ScrollToTop />
+                <Hero data={portfolioData} />
+                <About data={portfolioData} />
+                <Experience data={portfolioData} />
+                <Projects data={portfolioData} />
+                <Skills data={portfolioData} />
+              </div>
+            </div>
+
+            {/* Bottom Half - Peels away */}
+            <div
+              className="fixed inset-x-0 bottom-0 overflow-hidden transition-all duration-1000 ease-out"
+              style={{
+                height: '50%',
+                transform: tearProgress > 80
+                  ? `translateY(${tearProgress - 80}%) translateZ(-${tearProgress * 2}px) rotateX(-${tearProgress/4}deg) scale(${1 - tearProgress/200})` 
+                  : 'translateY(0) translateZ(0) rotateX(0) scale(1)',
+                transformOrigin: 'top center',
+                opacity: tearProgress > 90 ? (100 - tearProgress) / 10 : 1,
+                filter: `blur(${(tearProgress > 80) ? (tearProgress - 80) / 5 : 0}px)`,
+                zIndex: 35,
+              }}
+            >
+              <div 
+                className="App" 
+                style={{ 
+                  transform: 'translateY(-50vh)',
+                }}
+              >
+                <Navigation />
+                <ScrollToTop />
+                <Hero data={portfolioData} />
+                <About data={portfolioData} />
+                <Experience data={portfolioData} />
+                <Projects data={portfolioData} />
+                <Skills data={portfolioData} />
+                <Education data={portfolioData} />
+                <Contact data={portfolioData} />
+              </div>
+            </div>
+          </>
+        ) : (
+          /* Normal scrollable view when no tear */
+          <div className="App">
+            <Navigation />
+            <ScrollToTop />
+            <Hero data={portfolioData} />
+            <About data={portfolioData} />
+            <Experience data={portfolioData} />
+            <Projects data={portfolioData} />
+            <Skills data={portfolioData} />
+            <Education data={portfolioData} />
+            <Contact data={portfolioData} />
+          </div>
+        )}
+      </div>
+
+      {/* AlterEgo is now rendered in the transition layer above */}
     </div>
   );
 }
