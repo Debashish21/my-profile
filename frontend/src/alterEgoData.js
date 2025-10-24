@@ -2,7 +2,7 @@
 export const alterEgoData = {
   personal: {
     name: "DEBASHISH.RAM",
-    title: "Product Architect | Growth Hacker | Data Alchemist",
+    title: "Product Analyst | Growth Hacker | Data Alchemist",
     tagline: "HUSTLE UNTIL YOUR PASSION BECOMES YOUR JOB",
     bio: "Multi-dimensional strategist operating at the intersection of product, marketing, and data."
   },

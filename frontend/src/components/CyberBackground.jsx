@@ -7,7 +7,7 @@ const ParticleField = () => {
   const pointsRef = useRef();
   
   const particles = React.useMemo(() => {
-    const count = 1000;
+    const count = 500; // Reduced from 1000 for better performance
     const positions = new Float32Array(count * 3);
     const colors = new Float32Array(count * 3);
     
@@ -66,7 +66,15 @@ const CyberBackground = () => {
     <div className="fixed inset-0 -z-10 bg-[#0a0a0f]">
       {/* 3D Particle Field */}
       <div className="absolute inset-0">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
+        <Canvas 
+          camera={{ position: [0, 0, 5], fov: 75 }}
+          dpr={[1, 1.5]} // Limit pixel ratio for better performance
+          performance={{ min: 0.5 }} // Allow frame rate to drop if needed
+          gl={{ 
+            antialias: false, // Disable antialiasing for better performance
+            powerPreference: 'high-performance'
+          }}
+        >
           <color attach="background" args={['#0a0a0f']} />
           <ambientLight intensity={0.5} />
           <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />

@@ -1,51 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, MeshDistortMaterial, Sphere, Box, Torus } from '@react-three/drei';
 import { ChevronRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
-
-// 3D Scene Component
-const Section3D = ({ sectionKey }) => {
-  const groupRef = useRef();
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-      groupRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
-    }
-  });
-
-  const getGeometry = () => {
-    const color = '#06b6d4';
-    switch(sectionKey) {
-      case 'productManagement':
-        return <Box args={[1.5, 1.5, 1.5]}><MeshDistortMaterial color={color} distort={0.4} speed={2} metalness={0.8} roughness={0.2} /></Box>;
-      case 'marketing':
-        return <Torus args={[1, 0.4, 16, 100]}><MeshDistortMaterial color="#a855f7" distort={0.3} speed={2} metalness={0.8} roughness={0.2} /></Torus>;
-      case 'dataAnalysis':
-        return <Sphere args={[1, 64, 64]}><MeshDistortMaterial color={color} distort={0.5} speed={3} metalness={0.8} roughness={0.2} /></Sphere>;
-      case 'businessDevelopment':
-        return <Box args={[1.2, 1.8, 1.2]}><MeshDistortMaterial color="#ec4899" distort={0.3} speed={2} metalness={0.8} roughness={0.2} /></Box>;
-      case 'aiAutomation':
-        return <Sphere args={[1.2, 32, 32]}><MeshDistortMaterial color="#8b5cf6" distort={0.6} speed={4} metalness={0.8} roughness={0.2} /></Sphere>;
-      default:
-        return <Sphere args={[1, 32, 32]}><MeshDistortMaterial color={color} distort={0.4} speed={2} metalness={0.8} roughness={0.2} /></Sphere>;
-    }
-  };
-
-  return (
-    <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
-      <group ref={groupRef}>
-        {getGeometry()}
-        <pointLight position={[2, 2, 2]} intensity={1} color="#06b6d4" />
-      </group>
-    </Float>
-  );
-};
 
 const AlterEgoSection = ({ section, sectionKey }) => {
   const [hoveredCard, setHoveredCard] = useState(null);
@@ -126,10 +84,10 @@ const AlterEgoSection = ({ section, sectionKey }) => {
       }
     });
 
-    // Parallax 3D canvas
+    // Parallax background effect
     if (canvasRef.current) {
       gsap.to(canvasRef.current, {
-        y: -150,
+        y: -100,
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top bottom',
@@ -150,15 +108,28 @@ const AlterEgoSection = ({ section, sectionKey }) => {
       id={sectionIdMap[sectionKey] || sectionKey}
       className="min-h-screen py-12 md:py-20 px-4 md:px-6 relative bg-[#0a0a0f] overflow-hidden"
     >
-      {/* 3D Canvas Background */}
-      <div ref={canvasRef} className="absolute inset-0 opacity-30 pointer-events-none">
-        <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-          <ambientLight intensity={0.5} />
-          <Section3D sectionKey={sectionKey} />
-        </Canvas>
+      {/* Animated Background - CSS-based for performance */}
+      <div ref={canvasRef} className="absolute inset-0 opacity-20 pointer-events-none overflow-hidden">
+        {/* Animated gradient orbs */}
+        <div 
+          className="absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl animate-pulse"
+          style={{
+            background: sectionKey === 'marketing' ? 'radial-gradient(circle, rgba(168,85,247,0.3) 0%, transparent 70%)' :
+                       sectionKey === 'businessDevelopment' ? 'radial-gradient(circle, rgba(236,72,153,0.3) 0%, transparent 70%)' :
+                       sectionKey === 'aiAutomation' ? 'radial-gradient(circle, rgba(139,92,246,0.3) 0%, transparent 70%)' :
+                       'radial-gradient(circle, rgba(6,182,212,0.3) 0%, transparent 70%)',
+            animationDuration: '4s'
+          }}
+        />
+        <div 
+          className="absolute bottom-1/4 right-1/4 w-80 h-80 rounded-full blur-3xl animate-pulse"
+          style={{
+            background: 'radial-gradient(circle, rgba(139,92,246,0.2) 0%, transparent 70%)',
+            animationDuration: '5s',
+            animationDelay: '1s'
+          }}
+        />
       </div>
-
-      {/* Background Effects - Removed grid */}
 
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Section Header */}

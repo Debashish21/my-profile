@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import './App.css';
 import './AlterEgo.css';
 import { portfolioData } from './data';
@@ -10,6 +10,7 @@ import Experience from './components/Experience';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import Education from './components/Education';
+import Extracurricular from './components/Extracurricular';
 import Contact from './components/Contact';
 import RealityTear from './components/RealityTear';
 import AlterEgoApp from './components/alterego/AlterEgoApp';
@@ -27,23 +28,26 @@ function App() {
   const [isSplitting, setIsSplitting] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [alterEgoOpacity, setAlterEgoOpacity] = useState(0);
+  const transitionTimeoutRef = useRef(null);
+  const fadeTimeoutRef = useRef(null);
 
   console.log(tearProgress,"tearProgress")
-  const handlePortalActivate = () => {
+  const handlePortalActivate = useCallback(() => {
+    console.log('🌀 Portal activated - transitioning to AlterEgo');
     // Start transition phase
     setIsTransitioning(true);
     
     // Animate AlterEgo fade-in
-    setTimeout(() => {
+    fadeTimeoutRef.current = setTimeout(() => {
       setAlterEgoOpacity(1);
     }, 200);
     
     // Complete transition
-    setTimeout(() => {
+    transitionTimeoutRef.current = setTimeout(() => {
       setIsAlterEgo(true);
       setIsTransitioning(false);
     }, 1000);
-  };
+  }, []);
   
   const handleTearProgress = (progress) => {
     // Don't update progress if we're already in AlterEgo or transitioning out
@@ -58,21 +62,29 @@ function App() {
     }
   };
 
-  const handleExit = () => {
-    // Reset states immediately to prevent re-trigger
+  const handleExit = useCallback(() => {
+    console.log('🔙 Exit button clicked - returning to main portfolio');
+    
+    // Cancel any pending transitions
+    if (transitionTimeoutRef.current) {
+      clearTimeout(transitionTimeoutRef.current);
+      transitionTimeoutRef.current = null;
+    }
+    if (fadeTimeoutRef.current) {
+      clearTimeout(fadeTimeoutRef.current);
+      fadeTimeoutRef.current = null;
+    }
+    
+    // Immediately hide AlterEgo and show main content
+    setIsAlterEgo(false);
+    setIsTransitioning(false);
     setTearProgress(0);
     setIsSplitting(false);
-    
-    // Start reverse transition
-    setIsTransitioning(true);
     setAlterEgoOpacity(0);
     
-    setTimeout(() => {
-      setIsAlterEgo(false);
-      setIsTransitioning(false);
-      window.scrollTo(0, 0);
-    }, 500);
-  };
+    // Scroll to top
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="relative overflow-hidden">
@@ -82,6 +94,7 @@ function App() {
         style={{
           opacity: isAlterEgo ? 1 : (tearProgress / 100),
           zIndex: 40,
+          willChange: 'opacity', // Optimize opacity transitions
         }}
       >
         <CyberBackground />
@@ -113,6 +126,7 @@ function App() {
             position: isAlterEgo ? 'relative' : 'fixed',
             inset: isAlterEgo ? 'auto' : 0,
             minHeight: isAlterEgo ? '100vh' : 'auto',
+            willChange: 'opacity', // Optimize opacity transitions
           }}
         >
           <AlterEgoApp onExit={handleExit} />
@@ -156,6 +170,7 @@ function App() {
                 <Experience data={portfolioData} />
                 <Projects data={portfolioData} />
                 <Skills data={portfolioData} />
+                <Extracurricular data={portfolioData} />
               </div>
             </div>
 
@@ -186,6 +201,7 @@ function App() {
                 <Experience data={portfolioData} />
                 <Projects data={portfolioData} />
                 <Skills data={portfolioData} />
+                <Extracurricular data={portfolioData} />
                 <Education data={portfolioData} />
                 <Contact data={portfolioData} />
               </div>
@@ -201,6 +217,7 @@ function App() {
             <Experience data={portfolioData} />
             <Projects data={portfolioData} />
             <Skills data={portfolioData} />
+            <Extracurricular data={portfolioData} />
             <Education data={portfolioData} />
             <Contact data={portfolioData} />
           </div>

@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import '../App.css';
 import { portfolioData } from '../data';
 import Navigation from '../components/Navigation';
@@ -15,35 +14,19 @@ import Contact from '../components/Contact';
 import RealityTear from '../components/RealityTear';
 
 const MainPortfolio = () => {
-  const navigate = useNavigate();
-  const [isTransitioning, setIsTransitioning] = useState(false);
-
+  // Keep RealityTear visual effect but don't navigate anywhere
   const handlePortalActivate = () => {
-    setIsTransitioning(true);
-    
-    // Smooth fade and navigate
-    setTimeout(() => {
-      navigate('/alter-ego');
-    }, 600);
+    // No navigation - just visual effect
+    console.log('Reality Tear activated - visual effect only');
   };
 
   return (
     <div className="relative">
-      {/* Reality Tear Effect */}
+      {/* Reality Tear Effect - Visual only, no navigation */}
       <RealityTear 
         onComplete={handlePortalActivate} 
         isActive={false}
       />
-
-      {/* Transition Overlay */}
-      {isTransitioning && (
-        <div 
-          className="fixed inset-0 z-[100] bg-black animate-fadeIn"
-          style={{ 
-            animation: 'fadeIn 0.6s ease-in-out forwards'
-          }}
-        />
-      )}
 
       {/* Main Content */}
       <div className="App">

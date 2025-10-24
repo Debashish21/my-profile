@@ -1,72 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useMotionValue, animate } from 'framer-motion';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-
-// 3D Particle field visible through the zipper
-const ParticleField = () => {
-  const pointsRef = useRef();
-  
-  const particles = React.useMemo(() => {
-    const count = 1000;
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
-    
-    for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
-      
-      const color = new THREE.Color();
-      color.setHSL(0.5 + Math.random() * 0.2, 1, 0.5);
-      colors[i * 3] = color.r;
-      colors[i * 3 + 1] = color.g;
-      colors[i * 3 + 2] = color.b;
-    }
-    
-    return { positions, colors };
-  }, []);
-  
-  useFrame((state) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y = state.clock.elapsedTime * 0.05;
-      pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.1) * 0.1;
-    }
-  });
-  
-  return (
-    <points ref={pointsRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          count={particles.positions.length / 3}
-          array={particles.positions}
-          itemSize={3}
-        />
-        <bufferAttribute
-          attach="attributes-color"
-          count={particles.colors.length / 3}
-          array={particles.colors}
-          itemSize={3}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.05}
-        vertexColors
-        transparent
-        opacity={0.8}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  );
-};
 
 const RealityTear = ({ onComplete, onProgress, isActive }) => {
   const [isDragging, setIsDragging] = useState(false);
   const [zipperOpen, setZipperOpen] = useState(0); // 0-100%
-  const [showHint, setShowHint] = useState(true);
   const [isResetting, setIsResetting] = useState(false);
+  const [isTouched, setIsTouched] = useState(false); // Track touch/hover state
   const containerRef = useRef(null);
   const sliderY = useMotionValue(0);
   
@@ -97,7 +36,9 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
       console.log('🎉 Zipper fully open! Triggering transition...');
       // Zipper fully open, complete transition
       setTimeout(() => {
-        onComplete();
+        if (!isActive && !isResetting) {
+          onComplete();
+        }
       }, 500);
     }
   }, [zipperOpen, isActive, isResetting, onComplete]);
@@ -124,19 +65,16 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
     prevActiveRef.current = isActive;
   }, [isActive, sliderY]);
   
-  useEffect(() => {
-    // Auto-hide hint after 5 seconds
-    const timer = setTimeout(() => setShowHint(false), 5000);
-    return () => clearTimeout(timer);
-  }, []);
+  // No more text hint timeout as we're using an animated tear puller instead
   
   const handleDragStart = () => {
     setIsDragging(true);
-    setShowHint(false);
+    setIsTouched(true);
   };
   
   const handleDragEnd = () => {
     setIsDragging(false);
+    setIsTouched(false);
     
     if (zipperOpen < 100) {
       // Snap back if not complete
@@ -161,48 +99,10 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
         display: isActive ? 'none' : 'block',
       }}
     >
-      {/* Hint - Mobile Responsive */}
-      {showHint && (
-        <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0 }}
-          className="absolute top-1/2 left-4 md:left-32 -translate-y-1/2 pointer-events-none"
-        >
-          <div className="backdrop-blur-xl bg-black/50 border border-cyan-400/50 rounded-2xl px-4 md:px-6 py-3 md:py-4 text-center shadow-2xl">
-            <motion.div
-              animate={{ x: [0, 10, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="text-2xl md:text-4xl mb-1 md:mb-2"
-            >
-              ➡️
-            </motion.div>
-            <p className="text-cyan-400 font-mono text-xs md:text-sm font-bold whitespace-nowrap">
-              Drag Right to Unzip
-            </p>
-            <div className="absolute -left-3 md:-left-4 top-1/2 -translate-y-1/2 w-0 h-0 border-t-6 md:border-t-8 border-t-transparent border-b-6 md:border-b-8 border-b-transparent border-r-6 md:border-r-8 border-r-cyan-400/50" />
-          </div>
-        </motion.div>
-      )}
+      {/* No more text hint, the puller animation is the hint */}
       
-      {/* 3D Particle Field - Visible through zipper */}
-      {zipperOpen > 0 && (
-        <div 
-          className="fixed inset-0 pointer-events-none"
-          style={{
-            opacity: zipperOpen / 100,
-            zIndex: 45,
-          }}
-        >
-          <Canvas camera={{ position: [0, 0, 5], fov: 75 }}>
-            <color attach="background" args={['#0a0a0f']} />
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={1} color="#06b6d4" />
-            <pointLight position={[-10, -10, -10]} intensity={0.5} color="#8b5cf6" />
-            <ParticleField />
-          </Canvas>
-        </div>
-      )}
+      {/* 3D Particle Field - Removed to prevent multiple Canvas instances */}
+      {/* The CyberBackground component already provides the 3D particle effect */}
       
       {/* Cyber Tear Effect - Only where pulled */}
       {zipperOpen > 0 && (
@@ -312,10 +212,23 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
           dragMomentum={false}
           onDragStart={handleDragStart}
           onDragEnd={handleDragEnd}
+          onTouchStart={() => setIsTouched(true)}
+          onTouchEnd={() => setIsTouched(false)}
+          onMouseEnter={() => setIsTouched(true)}
+          onMouseLeave={() => !isDragging && setIsTouched(false)}
           style={{ 
             x: sliderY,
             zIndex: 60,
             touchAction: 'none',
+          }}
+          animate={{ 
+            x: [0, 8, 0], // Subtle horizontal animation suggesting to pull right
+          }}
+          transition={{ 
+            duration: 2,
+            repeat: Infinity,
+            repeatType: "reverse",
+            ease: "easeInOut" 
           }}
           className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing pointer-events-auto"
         >
@@ -328,47 +241,70 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
             transition={{ duration: 0.5, repeat: isDragging ? Infinity : 0 }}
             className="relative"
           >
-            {/* Cyber Pull - Holographic (Smaller) */}
-            <div className="relative w-16 h-16">
-              {/* Outer ring */}
-              <div className="absolute inset-0 rounded-full border-2 border-cyan-400/50 bg-black/80 backdrop-blur-sm" />
+            {/* Cyber Pull - Holographic (Smaller on mobile, translucent until touched) */}
+            <div className="relative w-12 h-12 md:w-16 md:h-16">
+              {/* Outer ring - translucent on mobile, lights up on touch */}
+              <motion.div 
+                className="absolute inset-0 rounded-full border-2 bg-black backdrop-blur-sm"
+                animate={{
+                  borderColor: isTouched ? 'rgba(6, 182, 212, 0.8)' : 'rgba(6, 182, 212, 0.3)',
+                  opacity: isTouched ? 1 : 0.4,
+                }}
+                transition={{ duration: 0.2 }}
+              />
               
-              {/* Energy core */}
+              {/* Energy core - brighter when touched */}
               <motion.div
                 className="absolute inset-2 rounded-full bg-gradient-to-br from-cyan-400 to-purple-500"
                 animate={{
+                  opacity: isTouched ? 1 : 0.5,
                   boxShadow: isDragging 
                     ? ['0 0 15px #06b6d4', '0 0 25px #8b5cf6', '0 0 15px #06b6d4']
-                    : '0 0 10px #06b6d4',
+                    : isTouched
+                    ? '0 0 20px #06b6d4'
+                    : '0 0 8px #06b6d4',
                 }}
-                transition={{ duration: 0.8, repeat: isDragging ? Infinity : 0 }}
+                transition={{ duration: isDragging ? 0.8 : 0.2, repeat: isDragging ? Infinity : 0 }}
               >
                 {/* Inner glow */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 to-transparent" />
+                <motion.div 
+                  className="absolute inset-0 rounded-full bg-gradient-to-br from-white/40 to-transparent"
+                  animate={{ opacity: isTouched ? 0.6 : 0.3 }}
+                  transition={{ duration: 0.2 }}
+                />
               </motion.div>
               
-              {/* Holographic lines */}
+              {/* Holographic lines - more visible when touched */}
               <div className="absolute inset-0 flex items-center justify-center">
                 {[...Array(3)].map((_, i) => (
                   <motion.div
                     key={i}
                     className="absolute w-8 h-0.5 bg-gradient-to-r from-transparent via-cyan-400 to-transparent"
                     style={{ rotate: `${i * 60}deg` }}
-                    animate={{ opacity: [0.3, 1, 0.3] }}
+                    animate={{ 
+                      opacity: isTouched ? [0.5, 1, 0.5] : [0.2, 0.5, 0.2]
+                    }}
                     transition={{ duration: 2, repeat: Infinity, delay: i * 0.3 }}
                   />
                 ))}
               </div>
               
-              {/* Center icon */}
-              <div className="absolute inset-0 flex items-center justify-center text-white font-bold text-sm z-10">
+              {/* Center icon (smaller on mobile, brighter when touched) */}
+              <motion.div 
+                className="absolute inset-0 flex items-center justify-center text-white font-bold text-xs md:text-sm z-10"
+                animate={{ opacity: isTouched ? 1 : 0.6 }}
+                transition={{ duration: 0.2 }}
+              >
                 ⚡
-              </div>
+              </motion.div>
               
-              {/* Drag indicator */}
+              {/* Enhanced drag indicator - brighter when touched */}
               <motion.div
-                className="absolute -right-6 top-1/2 -translate-y-1/2 text-cyan-400 text-xl"
-                animate={{ x: [0, 5, 0] }}
+                className="absolute -right-5 md:-right-6 top-1/2 -translate-y-1/2 text-cyan-400 text-lg md:text-xl"
+                animate={{ 
+                  x: [0, 8, 0], 
+                  opacity: isTouched ? [0.9, 1, 0.9] : [0.4, 0.7, 0.4]
+                }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
                 ➤

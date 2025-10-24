@@ -5,9 +5,9 @@ const AlterEgoHero = ({ data }) => {
   const [displayText, setDisplayText] = useState('');
 
   useEffect(() => {
-    // Typing animation
+    // Typing animation for dimension description
     let index = 0;
-    const fullText = data.personal.title;
+    const fullText = "Beyond the Resume • Passions & Side Quests";
     const timer = setInterval(() => {
       if (index <= fullText.length) {
         setDisplayText(fullText.slice(0, index));
@@ -20,7 +20,7 @@ const AlterEgoHero = ({ data }) => {
     return () => {
       clearInterval(timer);
     };
-  }, [data.personal.title]);
+  }, []);
 
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
@@ -29,10 +29,15 @@ const AlterEgoHero = ({ data }) => {
       {/* Content */}
       <div className="relative z-10 max-w-5xl mx-auto px-4 md:px-6 text-center">
         {/* Terminal Header */}
-        <div className="mb-8 flex items-center justify-center gap-2 text-cyan-400 font-mono text-sm">
+        <div className="mb-2 flex items-center justify-center gap-2 text-cyan-400 font-mono text-sm">
           <Terminal className="w-4 h-4 animate-pulse" />
           <span className="opacity-70">SYSTEM_ONLINE</span>
           <span className="animate-blink">_</span>
+        </div>
+        
+        {/* Work in Progress Indicator - Smaller */}
+        <div className="mb-8 text-xs text-gray-500 font-mono">
+          <span className="opacity-60">⚠️ Site under construction</span>
         </div>
 
         {/* Name with Gradient */}
@@ -42,7 +47,7 @@ const AlterEgoHero = ({ data }) => {
           </span>
         </h1>
 
-        {/* Typing Title */}
+        {/* Typing Description - Explaining this section */}
         <div className="min-h-[60px] md:min-h-[80px] mb-8">
           <h2 className="text-lg sm:text-2xl md:text-4xl font-mono text-cyan-300">
             <span className="text-purple-400">{'> '}</span>
