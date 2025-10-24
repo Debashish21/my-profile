@@ -93,7 +93,8 @@ function App() {
         className="fixed inset-0 transition-opacity duration-500"
         style={{
           opacity: isAlterEgo ? 1 : (tearProgress / 100),
-          zIndex: 40,
+          zIndex: 0,
+          pointerEvents: 'none',
           willChange: 'opacity', // Optimize opacity transitions
         }}
       >
@@ -105,7 +106,8 @@ function App() {
         className="transition-opacity duration-1000"
         style={{ 
           opacity: isAlterEgo ? 0 : 1,
-          pointerEvents: isAlterEgo ? 'none' : 'auto'
+          pointerEvents: 'none',
+          zIndex: 20
         }}
       >
         <RealityTear 
@@ -121,7 +123,7 @@ function App() {
           className="transition-opacity duration-1000"
           style={{ 
             opacity: isAlterEgo ? 1 : alterEgoOpacity,
-            zIndex: isAlterEgo ? 50 : 45,
+            zIndex: isAlterEgo ? 30 : 25,
             pointerEvents: isAlterEgo ? 'auto' : 'none',
             position: isAlterEgo ? 'relative' : 'fixed',
             inset: isAlterEgo ? 'auto' : 0,
@@ -142,11 +144,25 @@ function App() {
           perspective: '1000px',
           perspectiveOrigin: 'center center',
           transition: 'opacity 1s ease-out',
-          zIndex: isAlterEgo ? 0 : 30,
+          zIndex: isAlterEgo ? 0 : 10,
         }}
       >
         {/* Normal scrollable content - peel effect only when tearing */}
-        {tearProgress > 0 ? (
+        {tearProgress === 0 ? (
+          /* Normal scrollable view when no tear */
+          <div className="App" style={{ position: 'relative', zIndex: 1 }}>
+            <Navigation />
+            <ScrollToTop />
+            <Hero data={portfolioData} />
+            <About data={portfolioData} />
+            <Experience data={portfolioData} />
+            <Projects data={portfolioData} />
+            <Skills data={portfolioData} />
+            <Extracurricular data={portfolioData} />
+            <Education data={portfolioData} />
+            <Contact data={portfolioData} />
+          </div>
+        ) : (
           <>
             {/* Top Half - Peels away */}
             <div
@@ -159,7 +175,7 @@ function App() {
                 transformOrigin: 'bottom center',
                 opacity: tearProgress > 90 ? (100 - tearProgress) / 10 : 1,
                 filter: `blur(${(tearProgress > 80) ? (tearProgress - 80) / 5 : 0}px)`,
-                zIndex: 35,
+                zIndex: 1,
               }}
             >
               <div className="App" style={{ transform: 'translateY(0)' }}>
@@ -185,7 +201,7 @@ function App() {
                 transformOrigin: 'top center',
                 opacity: tearProgress > 90 ? (100 - tearProgress) / 10 : 1,
                 filter: `blur(${(tearProgress > 80) ? (tearProgress - 80) / 5 : 0}px)`,
-                zIndex: 35,
+                zIndex: 1,
               }}
             >
               <div 
@@ -207,20 +223,6 @@ function App() {
               </div>
             </div>
           </>
-        ) : (
-          /* Normal scrollable view when no tear */
-          <div className="App">
-            <Navigation />
-            <ScrollToTop />
-            <Hero data={portfolioData} />
-            <About data={portfolioData} />
-            <Experience data={portfolioData} />
-            <Projects data={portfolioData} />
-            <Skills data={portfolioData} />
-            <Extracurricular data={portfolioData} />
-            <Education data={portfolioData} />
-            <Contact data={portfolioData} />
-          </div>
         )}
       </div>
 

@@ -65,7 +65,7 @@ const CyberBackground = () => {
   return (
     <div className="fixed inset-0 -z-10 bg-[#0a0a0f]">
       {/* 3D Particle Field */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 pointer-events-none">
         <Canvas 
           camera={{ position: [0, 0, 5], fov: 75 }}
           dpr={[1, 1.5]} // Limit pixel ratio for better performance
@@ -74,6 +74,7 @@ const CyberBackground = () => {
             antialias: false, // Disable antialiasing for better performance
             powerPreference: 'high-performance'
           }}
+          style={{ pointerEvents: 'none' }}
         >
           <color attach="background" args={['#0a0a0f']} />
           <ambientLight intensity={0.5} />

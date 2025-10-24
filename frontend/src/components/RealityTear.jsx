@@ -94,19 +94,15 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
   return (
     <div 
       ref={containerRef}
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 pointer-events-none"
       style={{ 
         display: isActive ? 'none' : 'block',
+        zIndex: 20,
       }}
     >
-      {/* No more text hint, the puller animation is the hint */}
-      
-      {/* 3D Particle Field - Removed to prevent multiple Canvas instances */}
-      {/* The CyberBackground component already provides the 3D particle effect */}
-      
       {/* Cyber Tear Effect - Only where pulled */}
       {zipperOpen > 0 && (
-        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 55 }}>
+        <svg className="absolute inset-0 w-full h-full pointer-events-none" style={{ zIndex: 1 }}>
           <defs>
             {/* Gradient for tear edges */}
             <linearGradient id="tearGradient" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -218,27 +214,22 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
           onMouseLeave={() => !isDragging && setIsTouched(false)}
           style={{ 
             x: sliderY,
-            zIndex: 60,
+            zIndex: 2,
             touchAction: 'none',
-          }}
-          animate={{ 
-            x: [0, 8, 0], // Subtle horizontal animation suggesting to pull right
-          }}
-          transition={{ 
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut" 
           }}
           className="absolute left-4 md:left-10 top-1/2 -translate-y-1/2 cursor-grab active:cursor-grabbing pointer-events-auto"
         >
           {/* Chain/Pull Tab */}
           <motion.div
             animate={{
-              scale: isDragging ? [1, 1.05, 1] : 1,
+              scale: isDragging ? [1, 1.05, 1] : [1, 1.08, 1],
               rotate: isDragging ? [0, 5, -5, 0] : 0,
             }}
-            transition={{ duration: 0.5, repeat: isDragging ? Infinity : 0 }}
+            transition={{ 
+              duration: isDragging ? 0.5 : 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
             className="relative"
           >
             {/* Cyber Pull - Holographic (Smaller on mobile, translucent until touched) */}
@@ -298,12 +289,24 @@ const RealityTear = ({ onComplete, onProgress, isActive }) => {
                 ⚡
               </motion.div>
               
-              {/* Enhanced drag indicator - brighter when touched */}
+              {/* Enhanced drag indicator - cyber gradient arrow */}
               <motion.div
-                className="absolute -right-5 md:-right-6 top-1/2 -translate-y-1/2 text-cyan-400 text-lg md:text-xl"
+                className="absolute -right-5 md:-right-6 top-1/2 -translate-y-1/2 text-2xl md:text-3xl font-bold"
+                style={{
+                  background: 'linear-gradient(90deg, #06b6d4, #8b5cf6, #ec4899)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text',
+                  filter: 'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))'
+                }}
                 animate={{ 
-                  x: [0, 8, 0], 
-                  opacity: isTouched ? [0.9, 1, 0.9] : [0.4, 0.7, 0.4]
+                  x: [0, 12, 0], 
+                  opacity: isTouched ? [0.9, 1, 0.9] : [0.6, 1, 0.6],
+                  filter: [
+                    'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))',
+                    'drop-shadow(0 0 15px rgba(139, 92, 246, 0.9))',
+                    'drop-shadow(0 0 8px rgba(6, 182, 212, 0.8))'
+                  ]
                 }}
                 transition={{ duration: 1.5, repeat: Infinity }}
               >
